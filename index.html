@@ -2,98 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fake Search</title>
+  <title>Google Search</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background: #fff;
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
+      padding: 1rem;
+      transition: background 0.3s ease, color 0.3s ease;
     }
+
+    body.dark {
+      background: #121212;
+      color: #e0e0e0;
+    }
+    body.light {
+      background: #f9f9f9;
+      color: #222;
+    }
+
     .logo {
-      font-size: 3rem;
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: bold;
-      color:#00FFF0;
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
+    body.dark .logo {
+      color: #00e5ff;
+      text-shadow: 0 0 10px rgba(0,229,255,0.6);
+    }
+    body.light .logo {
+      color: #4285f4;
+      text-shadow: none;
+    }
+
     .search-box {
       display: flex;
-      width: 90%;
-      max-width: 500px;
-      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 600px;
       border-radius: 50px;
-      padding: 10px 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 8px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: 0.3s ease;
     }
+    body.dark .search-box {
+      background: #1e1e1e;
+      border: 1px solid #333;
+    }
+    body.light .search-box {
+      background: #fff;
+      border: 1px solid #ddd;
+    }
+
     .search-box input {
       flex: 1;
       border: none;
       outline: none;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      padding: 10px;
+      background: transparent;
+      color: inherit;
     }
+
     .search-box button {
-      background: #4285f4;
+      background: linear-gradient(135deg, #00e5ff, #0091ea);
       color: white;
       border: none;
       border-radius: 50px;
       padding: 10px 20px;
       cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s ease;
     }
+    body.light .search-box button {
+      background: linear-gradient(135deg, #4285f4, #34a853);
+    }
+    .search-box button:hover {
+      transform: scale(1.05);
+    }
+
     .loading-bar {
       margin-top: 30px;
-      width: 300px;
-      height: 5px;
-      background: #ddd;
+      width: 80%;
+      max-width: 400px;
+      height: 6px;
       border-radius: 5px;
       overflow: hidden;
       display: none;
     }
+    body.dark .loading-bar { background: #2c2c2c; }
+    body.light .loading-bar { background: #ddd; }
+
     .loading-progress {
       height: 100%;
       width: 0;
-      background: #4285f4;
+      background: linear-gradient(90deg, #00e5ff, #0091ea);
       animation: load 2s linear forwards;
     }
+    body.light .loading-progress {
+      background: linear-gradient(90deg, #4285f4, #34a853);
+    }
+
     @keyframes load {
       to { width: 100%; }
     }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+    body.dark .toggle-btn {
+      background: #00e5ff;
+      color: #121212;
+    }
+    body.light .toggle-btn {
+      background: #4285f4;
+      color: #fff;
+    }
   </style>
 </head>
-<body>
+<body class="dark">
+  <button class="toggle-btn" onclick="toggleTheme()">Light Mode</button>
+
   <div class="logo">Google</div>
+
   <div class="search-box">
     <input type="text" id="query" placeholder="Search anything...">
     <button onclick="search()">Search</button>
   </div>
+
   <div class="loading-bar" id="loader">
     <div class="loading-progress"></div>
   </div>
 
   <script>
+    // Word → URL mapping
+    const redirects = {
+      "kojja": "https://jaswanth-kumar-2007.github.io/Temporary-1/",
+      "hello": "https://www.wikipedia.org/",
+      "test": "https://www.youtube.com/",
+      "sample": "https://www.github.com/"
+    };
+
     function search() {
       const query = document.getElementById('query').value.toLowerCase().trim();
       const loader = document.getElementById('loader');
       loader.style.display = 'block';
 
       setTimeout(() => {
-        if (query.includes('kojja')) {
-          window.location.href = 'https://jaswanth-kumar-2007.github.io/Temporary-1/';
-        } else {
-          // Open actual Google search for anything else
+        let found = false;
+        // Check for exact word match
+        for (let word in redirects) {
+          if (query === word) {
+            window.location.href = redirects[word];
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
           window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
         }
       }, 2000);
     }
 
-    // Allow Enter key
     document.getElementById('query').addEventListener('keydown', e => {
       if (e.key === 'Enter') search();
     });
+
+    function toggleTheme() {
+      const body = document.body;
+      const btn = document.querySelector('.toggle-btn');
+      body.classList.toggle('dark');
+      body.classList.toggle('light');
+      btn.textContent = body.classList.contains('dark') ? "Light Mode" : "Dark Mode";
+    }
   </script>
 </body>
 </html>
