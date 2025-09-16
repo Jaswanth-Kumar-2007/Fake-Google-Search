@@ -5,198 +5,93 @@
   <title>Google Search</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", Arial, sans-serif; }
+    body { display: flex; flex-direction: column; min-height: 100vh; background: #fff; color: #202124; }
+    
+    header { display: flex; justify-content: flex-end; padding: 10px 20px; }
+    .account { width: 35px; height: 35px; border-radius: 50%; background: #4285f4; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
 
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 1rem;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
+    .container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .logo { font-size: 5rem; color: #4285f4; font-weight: bold; margin-bottom: 20px; }
+    .search-box { display: flex; width: 100%; max-width: 600px; border: 1px solid #dfe1e5; border-radius: 24px; padding: 10px 15px; box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+    .search-box input { flex: 1; border: none; outline: none; font-size: 1rem; padding: 10px; }
+    .search-box button { background-color: #f8f9fa; border: 1px solid #f8f9fa; border-radius: 4px; padding: 8px 16px; margin-left: 8px; cursor: pointer; }
 
-    body.dark {
-      background: #121212;
-      color: #e0e0e0;
-    }
-    body.light {
-      background: #f9f9f9;
-      color: #222;
-    }
+    .trending { margin-top: 20px; width: 100%; max-width: 600px; }
+    .trending h3 { font-size: 0.9rem; color: #70757a; margin-bottom: 8px; }
+    .trending ul { list-style: none; }
+    .trending li { padding: 4px 0; cursor: pointer; color: #1a0dab; text-decoration: underline; font-size: 0.95rem; }
 
-    .logo {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: bold;
-      margin-bottom: 2rem;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-    body.dark .logo {
-      color: #00e5ff;
-      text-shadow: 0 0 10px rgba(0,229,255,0.6);
-    }
-    body.light .logo {
-      color: #4285f4;
-      text-shadow: none;
-    }
+    .languages { margin-top: 15px; font-size: 0.85rem; color: #70757a; }
+    .languages span { margin-right: 10px; cursor: pointer; color: #1a0dab; }
 
-    .search-box {
-      display: flex;
-      width: 100%;
-      max-width: 600px;
-      border-radius: 50px;
-      padding: 8px 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: 0.3s ease;
-    }
-    body.dark .search-box {
-      background: #1e1e1e;
-      border: 1px solid #333;
-    }
-    body.light .search-box {
-      background: #fff;
-      border: 1px solid #ddd;
-    }
-
-    .search-box input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      padding: 10px;
-      background: transparent;
-      color: inherit;
-    }
-
-    .search-box button {
-      background: linear-gradient(135deg, #00e5ff, #0091ea);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.3s ease;
-    }
-    body.light .search-box button {
-      background: linear-gradient(135deg, #4285f4, #34a853);
-    }
-    .search-box button:hover {
-      transform: scale(1.05);
-    }
-
-    .loading-bar {
-      margin-top: 30px;
-      width: 80%;
-      max-width: 400px;
-      height: 6px;
-      border-radius: 5px;
-      overflow: hidden;
-      display: none;
-    }
-    body.dark .loading-bar { background: #2c2c2c; }
-    body.light .loading-bar { background: #ddd; }
-
-    .loading-progress {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, #00e5ff, #0091ea);
-      animation: load 2s linear forwards;
-    }
-    body.light .loading-progress {
-      background: linear-gradient(90deg, #4285f4, #34a853);
-    }
-
-    @keyframes load {
-      to { width: 100%; }
-    }
-
-    .toggle-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 8px 14px;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: 0.3s ease;
-    }
-    body.dark .toggle-btn {
-      background: #00e5ff;
-      color: #121212;
-    }
-    body.light .toggle-btn {
-      background: #4285f4;
-      color: #fff;
-    }
+    footer { text-align: center; padding: 15px 0; font-size: 0.85rem; color: #70757a; border-top: 1px solid #e4e4e4; }
   </style>
 </head>
-<body class="dark">
-  <button class="toggle-btn" onclick="toggleTheme()">Light Mode</button>
+<body>
+  <header>
+    <div class="account">J</div>
+  </header>
 
-  <div class="logo">Google</div>
+  <div class="container">
+    <div class="logo">Google</div>
 
-  <div class="search-box">
-    <input type="text" id="query" placeholder="Search anything...">
-    <button onclick="search()">Search</button>
+    <div class="search-box">
+      <input type="text" id="query" placeholder="Search anything...">
+      <button onclick="search()">Search</button>
+    </div>
+
+    <div class="trending">
+      <h3>Trending searches</h3>
+      <ul>
+        <li>urban company ipo allotment status</li>
+        <li>google gemini ai nano banana saree</li>
+        <li>income tax itr filing due date</li>
+        <li>rrb ntpc answer key 2025 undergraduate</li>
+        <li>cred indusind bank credit card sovereign</li>
+      </ul>
+    </div>
+
+    <div class="languages">
+      Google offered in: 
+      <span>हिन्दी</span>
+      <span>বাংলা</span>
+      <span>తెలుగు</span>
+      <span>मराठी</span>
+      <span>தமிழ்</span>
+      <span>ગુજરાતી</span>
+      <span>ಕನ್ನಡ</span>
+      <span>മലയാളം</span>
+      <span>ਪੰਜਾਬੀ</span>
+    </div>
   </div>
 
-  <div class="loading-bar" id="loader">
-    <div class="loading-progress"></div>
-  </div>
+  <footer>Made by KJK</footer>
 
   <script>
-    // Word → URL mapping
     const redirects = {
       "kojja": "https://jaswanth-kumar-2007.github.io/Temporary-1/",
-      "hasini": "https://jaswanth-kumar-2007.github.io/Temporary-3/",
-      "kojaa": "https://jaswanth-kumar-2007.github.io/Temporary-1/",
-      "beautiful girl": "https://jaswanth-kumar-2007.github.io/Temporary-3/",
-      "video editor": "https://jaswanth-kumar-2007.github.io/Temporary-4/",
-      "sathvik": "https://jaswanth-kumar-2007.github.io/Temporary-4/",
+      "hasini": "hasini.html",
+      "kojaa": "chandra.html",
+      "beautiful girl": "hasini.html",
+      "video editor": "video.html",
+      "sathvik": "video.html",
       "chandrasekhar": "https://jaswanth-kumar-2007.github.io/Temporary-1/",
       "Chandrasekhar": "https://jaswanth-kumar-2007.github.io/Temporary-1/"
     };
 
     function search() {
       const query = document.getElementById('query').value.toLowerCase().trim();
-      const loader = document.getElementById('loader');
-      loader.style.display = 'block';
-
-      setTimeout(() => {
-        let found = false;
-        // Check for exact word match
-        for (let word in redirects) {
-          if (query === word) {
-            window.location.href = redirects[word];
-            found = true;
-            break;
-          }
-        }
-        if (!found) {
-          window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-        }
-      }, 2000);
+      if (redirects[query]) {
+        window.location.href = redirects[query];
+      } else {
+        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+      }
     }
 
     document.getElementById('query').addEventListener('keydown', e => {
       if (e.key === 'Enter') search();
     });
-
-    function toggleTheme() {
-      const body = document.body;
-      const btn = document.querySelector('.toggle-btn');
-      body.classList.toggle('dark');
-      body.classList.toggle('light');
-      btn.textContent = body.classList.contains('dark') ? "Light Mode" : "Dark Mode";
-    }
   </script>
 </body>
 </html>
