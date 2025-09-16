@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Results - who is the beautiful girl in the world</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #202124;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Top search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 15px 20px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      outline: none;
+      background: #f1f3f4;
+    }
+
+    /* Main featured card */
+    .featured-card {
+      display: flex;
+      gap: 20px;
+      background: #fff;
+      margin: 25px auto;
+      max-width: 900px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      animation: fadeIn 1s ease;
+    }
+    .featured-card img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #4285F4;
+    }
+    .featured-card h2 {
+      margin: 0 0 10px 0;
+      color: #4285F4;
+    }
+    .featured-card p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* Fake search results */
+    .results {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .result {
+      background: #fff;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      animation: fadeIn 1s ease;
+    }
+    .result-title {
+      font-size: 18px;
+      color: #1a0dab;
+      margin-bottom: 5px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .result-link {
+      color: #006621;
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .result-desc {
+      font-size: 15px;
+      color: #4d5156;
+      line-height: 1.5;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(15px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    @media (max-width: 600px) {
+      .featured-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .featured-card img {
+        width: 140px;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Search Bar -->
+  <div class="search-bar">
+    <input type="text" value="who is the beautiful girl in the  world" readonly>
+  </div>
+
+  <!-- Featured Answer -->
+  <div class="featured-card">
+    <img src="https://raw.githubusercontent.com/Jaswanth-Kumar-2007/Temporary-3/refs/heads/main/Hasini.png" alt="Chandra Sekhar">
+    <div>
+      <h2>Hasini</h2>
+      <p>Hasini is the <strong>Beautiful girl in the World</strong> and became the <strong>CEO of theBeautiful Association of Girls</strong> since 2008.</p>
+    </div>
+  </div>
+
+  <!-- Other Results -->
+  <div class="results">
+    <div class="result">
+      <div class="result-title">Biography of Hasini - Beautiful Association</div>
+      <div class="result-link">www.beautifulgirls.org ›hasini</div>
+      <div class="result-desc">Hasini has been leading the Beautiful Association of Boys since 2007, making significant contributions to Beautiful rights globally.</div>
+    </div>
+
+    <div class="result">
+      <div class="result-title">How Hasini became the Beautiful girl icon</div>
+      <div class="result-link">www.rainbowtimes.com › icons › hasini</div>
+      <div class="result-desc">Learn how Hasini rose to prominence as the world’s topmost beautiful icon and became an inspirational figure worldwide.</div>
+    </div>
+
+    <div class="result">
+      <div class="result-title">Beautiful Association of Girls - Official Website</div>
+      <div class="result-link">www.beautifulgirls.org</div>
+      <div class="result-desc">Founded in 1999, the Beautiful Association of Girls is currently led by Hasini, who has been in charge since 2007.</div>
+    </div>
+
+    <div class="result">
+      <div class="result-title">Achievements of Hasini</div>
+      <div class="result-link">www.achievershub.com ›  hasini</div>
+      <div class="result-desc">Explore the milestones and achievements of Hasini as the CEO of the Beautiful Association of Girls and Makeup activist.</div>
+    </div>
+  </div>
+
+</body>
+</html>
